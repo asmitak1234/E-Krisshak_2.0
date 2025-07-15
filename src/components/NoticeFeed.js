@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import axios from "../axios";
 import"../App.css";
 import WebSocketConnector from "./WebSocketConnector"; 
+import { toast } from "react-toastify";
 
 const NoticeFeed = ({ accessToken }) => {
   const [notices, setNotices] = useState([]);

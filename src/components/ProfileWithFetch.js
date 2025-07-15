@@ -125,7 +125,7 @@ const ProfileWithFetch = ({
           actionButtons={typeof actionButtons !== "undefined" ? actionButtons : undefined}
           customMessage={customMessage}
           appointmentCreatedAt={appointment?.created_at || appointment?.date}
-          onPayNow={(profile) => setPaymentTarget({ appointment: a, profile })}
+          onPayNow={isBhooswami ? (profile) => onPayNow?.(profile) : null}
           // onPayNow={onPayNow}       
        />
 

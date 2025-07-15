@@ -140,7 +140,7 @@ const PaymentsPage = () => {
               prev.map((a) =>
                 {a.id === appointment.id
                   ? { ...a, payment_status: "paid", updated_at: new Date().toISOString() }
-                  : a;
+                  : a
                 console.log("🔍 appointment", a.id, "krisshak type:", typeof a.krisshak, "price:", a.price);
                 }
               )
