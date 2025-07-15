@@ -1,38 +1,270 @@
-.App {
-  text-align: center;
+
+.container-fluid {
+  margin-left: auto !important;
+  margin-right: auto !important;
 }
 
-.App-logo {
-  height: 40vmin;
+/* Sidebar basics */
+.sidebar {
+  position: fixed;
+  top: 56px;
+  left: 0;
+  height: calc(100vh - 56px);
+  width: 240px;
+  background: #f8f9fa;
+  transition: width 0.3s ease, box-shadow 0.3s ease;
+  z-index: 1050;
+  overflow-x: hidden;
+}
+
+.sidebar.collapsed {
+  width: 70px;
+}
+
+.sidebar.collapsed .label {
+  opacity: 0;
+  pointer-events: none;
+  transform: translateX(-10px);
+}
+
+.sidebar-link.active {
+  background-color: #e6f4ea;
+  font-weight: bold;
+  border-radius: 6px;
+}
+
+.sidebar.expanded .label {
+  opacity: 1;
+  transform: translateX(0);
+}
+
+.icon {
+  font-size: 1.6rem;
+  filter: brightness(1.2);
+}
+
+.toggle-btn {
+  text-align: end;
+}
+
+.toggle-btn button {
+  font-size: 2rem; /* Bigger text */
+  font-weight: 700; /* Bolder appearance */
+  padding: 0.5rem 1rem;
+  color: #333;
+  background: none;
+  border: none;
+  cursor: pointer;
+  transition: transform 0.3s ease;
+}
+
+.toggle-btn button:hover {
+  transform: scale(1.1); /* Slight zoom on hover */
+  color: #007bff;
+}
+
+
+.sidebar-nav {
+  padding: 0 0.75rem;
+  display: flex;
+  flex-direction: column;
+}
+
+.sidebar-link {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.6rem 0.5rem;
+  color: #333;
+  border-radius: 4px;
+  text-decoration: none;
+  transition: background 0.3s ease;
+}
+
+.sidebar-link.active {
+  background-color: #e8f0fe;
+  font-weight: bold;
+}
+
+.label {
+  white-space: nowrap;
+  transition: opacity 0.3s ease;
+}
+
+/* Blur effect */
+.content-area {
+  padding: 1.5rem;
+  margin-left: 5rem;
+  transition: filter 0.3s ease;
+  overflow-x: auto;
+}
+
+
+/* Page content pushes right */
+.page-content {
+  margin-left: 220px;
+  margin-top: 2rem;
+  padding: 2rem;
+}
+
+.form-control::placeholder {
+  color: #6d6c6c;
+}
+
+button i.bi {
+  font-size: 1.2rem;
   pointer-events: none;
 }
 
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
+.main-navbar {
+  background-color: #fff !important;
+  box-shadow: 0 1px 4px rgba(0, 0, 0, 0.1);
+  position: fixed;
+  top: 0;
+  width: 100%;
+  z-index: 1050; /* Bootstrap navbar default */
 }
 
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
+/* #myprofilebadge{
+  animation: pulse 1.5s infinite;
+} */
+
+@keyframes pulse {
+    0% { box-shadow: 0 0 0px #22c55e; }
+    50% { box-shadow: 0 0 10px #22c55e; }
+    100% { box-shadow: 0 0 0px #22c55e; }
+  }
+
+.calendar-today {
+  box-shadow: 0 0 8px rgba(59, 130, 246, 0.6);
+  animation: pulseGlow 2s infinite;
+}
+
+@keyframes pulseGlow {
+  0% { box-shadow: 0 0 8px rgba(59, 130, 246, 0.5); }
+  50% { box-shadow: 0 0 20px rgba(59, 130, 246, 0.9); }
+  100% { box-shadow: 0 0 8px rgba(59, 130, 246, 0.5); }
+}
+
+.weekday-col {
+  text-align: center;
+  min-width: 60px !important;
+  flex: 1;
+  overflow: hidden;
+}
+.calendar-wrapper {
+  position: relative;
   display: flex;
   flex-direction: column;
+  flex-wrap: nowrap;
+}
+.calendar-wrapper .col {
+  flex: 1 0 0; /* Evenly distribute space */
+  min-width: 60px;
+}
+
+.calendar-wrapper::before {
+  content: "";
+  display: block;
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 8px;
+  background: linear-gradient(to bottom, #ef4444, #fef2f2);
+  border-radius: 12px 12px 0 0;
+}
+.weekday-row {
+  display: flex;
+  width: 100%;
+  justify-content: space-between;
+}
+
+.weekday-box {
+  flex: 1;
+  display: flex;
   align-items: center;
   justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: white;
+  padding: 10px 0;
+  /* border-right: 1px solid #e5e7eb; */
 }
 
-.App-link {
-  color: #61dafb;
+.weekday-box:last-child {
+  border-right: none;
 }
 
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
+.weekday-name {
+  font-weight: 600;
+  font-size: 1.3rem;
+  color: #475569;
+}
+
+
+@media (max-width: 576px) {
+  .weekday-col {
+    font-size: 0.85rem;
+    padding: 2px;
   }
-  to {
-    transform: rotate(360deg);
+  .weekday-col span {
+    font-weight: 700;
+    font-size: 0.9rem;
+    color: #374151; /* Slate-ish tone */
+  }
+  .calendar-wrapper {
+    width: 90% !important;
+    padding: 8px;
+    border-width: 2px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.06);
+  }
+
+  .calendar-wrapper .col {
+    max-width: 90px !important;
+    font-size: 0.85rem;
+  }
+
+  .calendar-wrapper .day-name {
+    font-size: 1rem !important;
+  }
+
+}
+
+/* Responsive */
+@media (max-width: 576px) {
+  .sidebar {
+    width: 200px;
+  }
+  .content-area {
+    margin-left: 60px;
+    padding-left: 1rem;
+    padding-right: 1rem;
+  }
+}
+@media (max-width: 576px) {
+  .weekday-name {
+    font-size: 0.85rem;
+    font-weight: 700;
+  }
+
+  .weekday-box {
+    padding: 6px 0;
+  }
+}
+
+.pulse-animation {
+  animation: pulse 1.5s ease-in-out infinite;
+}
+
+@keyframes pulse {
+  0% {
+    transform: scale(1);
+    box-shadow: 0 0 0 rgba(0, 123, 255, 0.4);
+  }
+  50% {
+    transform: scale(1.05);
+    box-shadow: 0 0 10px rgba(0, 123, 255, 0.5);
+  }
+  100% {
+    transform: scale(1);
+    box-shadow: 0 0 0 rgba(0, 123, 255, 0.4);
   }
 }
