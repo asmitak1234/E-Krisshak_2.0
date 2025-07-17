@@ -137,15 +137,17 @@ const PaymentsPage = () => {
             });
 
             setAppointments((prev) =>
-              prev.map((a) =>
-                {a.id === appointment.id
+              prev.map((a) => {
+                const updated = a.id === appointment.id
                   ? { ...a, payment_status: "paid", updated_at: new Date().toISOString() }
-                  : a
-                console.log("🔍 appointment", a.id, "krisshak type:", typeof a.krisshak, "price:", a.price);
-                }
-              )
-            );
+                  : a;
 
+                console.log("🔍 appointment", a.id, "krisshak type:", typeof a.krisshak, "price:", a.price);
+
+                return updated;
+              })
+            );
+            
             const newEntry = {
               id: `manual-${appointment.id}-${Date.now()}`,
               type: "payment",
